@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <Header />
+      
+      <main style={{ padding: "20px", textAlign: "center" }}>
+        <h2>Welcome to React 🚀</h2>
+        <p>Now you are learning components!</p>
+      </main>
+
+      <Footer />
     </div>
   );
 }
