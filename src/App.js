@@ -1,16 +1,29 @@
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { useState } from "react";
+import { useEffect } from "react";
+import Home from "./components/pages/home";
+import Company from "./components/pages/company";
+import LoginPage from "./login/page"
 function App() {
+   const [count, setCount] = useState(0);
+useEffect(() => {
+  console.log("Count changed");
+}, [count]);
   return (
     <div className="App">
-          <Header />
-      
-      <main style={{ padding: "20px", textAlign: "center" }}>
-        <h2>Welcome to React 🚀</h2>
-        <p>Now you are learning components!</p>
-      </main>
+<BrowserRouter>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/company" element={<Company />} />
+        <Route path="/user/login" element={<LoginPage />} />
+      </Routes>
 
       <Footer />
+    </BrowserRouter>
     </div>
   );
 }

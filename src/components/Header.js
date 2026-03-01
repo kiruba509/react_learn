@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 import {
   Dialog,
   DialogPanel,
@@ -43,14 +44,14 @@ export default function Header() {
     <header className="bg-gray-900">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               alt=""
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
               className="h-8 w-42"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -107,20 +108,20 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="#" className="text-sm/6 font-semibold text-white">
+          <Link to="#" className="text-sm/6 font-semibold text-white">
             Features
-          </a>
-          <a href="#" className="text-sm/6 font-semibold text-white">
+          </Link>
+          <Link to="#" className="text-sm/6 font-semibold text-white">
             Marketplace
-          </a>
-          <a href="#" className="text-sm/6 font-semibold text-white">
+          </Link>
+          <Link to="/company" className="text-sm/6 font-semibold text-white">
             Company
-          </a>
+          </Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-white">
+          <Link to="/user/login" className="text-sm/6 font-semibold text-white">
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -177,20 +178,20 @@ export default function Header() {
                 >
                   Marketplace
                 </a>
-                <a
-                  href="#"
+                <Link
+                  to="/company"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
                   Company
-                </a>
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/user/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
