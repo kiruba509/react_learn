@@ -1,15 +1,51 @@
 import { useState } from "react";
-
+import axios from "axios";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
+const handleSubmit = async (e) => {
 
+  e.preventDefault();
+
+  try {
+
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/login",
+      {
+        email,
+        password
+      }
+    );
+
+    console.log(res.data);
+
+    // Save token
+    localStorage.setItem(
+      "token",
+      res.data.token
+    );
+
+    // Save user
+    localStorage.setItem(
+      "user",
+      JSON.stringify(res.data.user)
+    );
+
+    // alert("Login Success");
+
+    // Redirect
+    window.location.href = "/";
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert("Login Failed");
+
+  }
+
+};
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="bg-white shadow-xl rounded-2xl overflow-hidden max-w-4xl w-full grid md:grid-cols-2">
