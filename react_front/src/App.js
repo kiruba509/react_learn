@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Home from "./components/pages/home";
 import Company from "./components/pages/company";
+import Analytics from './components/products/Analytics';
 import LoginPage from "./login/page"
 function App() {
    const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ useEffect(() => {
         <Route path="/" element={<Home />} />
         <Route path="/company" element={<Company />} />
         <Route path="/user/login" element={<LoginPage />} />
+        <Route path="/products/analytics" element={<Analytics />} />
       </Routes>
 
       <Footer />
