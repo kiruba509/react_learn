@@ -1,72 +1,88 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-export default function Login() {
+export default function Register() {
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
+    try {
 
-    const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
-      {
-        email,
-        password
-      }
-    );
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          name,
+          email,
+          password
+        }
+      );
 
-    console.log(res.data);
+      console.log(res.data);
 
-    // Save token
-    localStorage.setItem(
-      "token",
-      res.data.token
-    );
+      alert("Register Success");
 
-    // Save user
-    localStorage.setItem(
-      "user",
-      JSON.stringify(res.data.user)
-    );
+      // Redirect to login page
+      window.location.href = "/user/login";
 
-    // alert("Login Success");
+    } catch (err) {
 
-    // Redirect
-    window.location.href = "/";
+      console.log(err);
 
-  } catch (err) {
+      alert("Register Failed");
 
-    console.log(err);
+    }
 
-    alert("Login Failed");
+  };
 
-  }
-
-};
   return (
+
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+
       <div className="bg-white shadow-xl rounded-2xl overflow-hidden max-w-4xl w-full grid md:grid-cols-2">
-        
+
         {/* Form Section */}
         <div className="p-8">
+
           <h1 className="text-2xl font-bold text-center mb-2">
-            Welcome Back
+            Create Account
           </h1>
+
           <p className="text-center text-gray-500 mb-6">
-            Login to your account
+            Register your new account
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
 
+            {/* Name */}
+            <div>
+
+              <label className="block text-sm font-medium mb-1">
+                Name
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+
+            </div>
+
             {/* Email */}
             <div>
+
               <label className="block text-sm font-medium mb-1">
                 Email
               </label>
+
               <input
                 type="email"
                 placeholder="m@example.com"
@@ -75,23 +91,25 @@ const handleSubmit = async (e) => {
                 required
                 className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
+
             </div>
 
             {/* Password */}
             <div>
-              <div className="flex justify-between text-sm mb-1">
-                <label className="font-medium">Password</label>
-                <Link to="/user/forgot-password" className="text-indigo-600 hover:underline">
-                  Forgot?
-                </Link>
-              </div>
+
+              <label className="block text-sm font-medium mb-1">
+                Password
+              </label>
+
               <input
                 type="password"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
+
             </div>
 
             {/* Button */}
@@ -99,29 +117,41 @@ const handleSubmit = async (e) => {
               type="submit"
               className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
             >
-              Login
+              Register
             </button>
 
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            Don't have an account?{" "}
-            <Link to="/user/register" className="text-indigo-600 hover:underline">
-              Sign up
+
+            Already have an account?{" "}
+
+            <Link
+              to="/user/login"
+              className="text-indigo-600 hover:underline"
+            >
+              Login
             </Link>
+
           </p>
+
         </div>
 
         {/* Image Section */}
         <div className="hidden md:block">
+
           <img
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-            alt="Login"
+            alt="Register"
             className="h-full w-full object-cover"
           />
+
         </div>
 
       </div>
+
     </div>
+
   );
+
 }
